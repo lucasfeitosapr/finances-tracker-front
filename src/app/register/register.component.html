@@ -11,7 +11,7 @@
         #username="ngModel"/>
         <div class="alert-danger" *ngIf="username['errors'] && f.submitted">
           <div *ngIf="username['errors']['required']">Username is required</div>
-          <div *ngIf="usernmae['errors']['minlength']">
+          <div *ngIf="username['errors']['minlength']">
             Username must be at most 20 characters
           </div>
         </div>

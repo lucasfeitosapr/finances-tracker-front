@@ -13,7 +13,9 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardUserComponent } from './board-user/board-user.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
-import { authInterceptorProviders } from './helpers/auth.interceptor'
+import { authInterceptorProviders } from './helpers/AuthInterceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider'
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { authInterceptorProviders } from './helpers/auth.interceptor'
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule],
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSliderModule],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
 })

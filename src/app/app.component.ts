@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { TokenStorageService } from './services/token-storage.service';
 import Validation from './utils/validation';
 
 @Component({
@@ -17,12 +18,31 @@ export class AppComponent implements OnInit {
 
   form: FormGroup;
   submitted = false;
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private tokenStorageService: TokenStorageService) {
     this.form = this.buildForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isLoggedIn = !this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
+  }
+
+  logout(): void {
+    this.tokenStorageService.signout();
+    window.location.reload();
+  }
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
